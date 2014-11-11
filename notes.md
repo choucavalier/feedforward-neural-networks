@@ -7,41 +7,17 @@
 * Example of a Stastical Model
   * IQ at EPITA, normal distrubition
 
-# 02-linear-regression
+# Binary classification
 
-## Example: price of houses depending on m²
 
-* Establishing the mathematical model
-* Math notation: matrix multiplication
-* Training set
-* Error
-
-[PROGRESSIVE DIAGRAM]
-linear combination
-show multiple inputs (e.g. number of rooms)
-
-## Gradient descent
-
-* Convergence
-
-[LIVE CODING]
-Linear regression on a set of data. matplotlib
-
-## Multi-variable linear regression
-
-* We can extend the concept to multiple variables by increasing the number of
-weights
-
-# 03-logistic-regression
-
-* Sometimes we want a binary output rather than finding out a continuous
-variable
-* Example: lung cancer
 * h(x) = g(x.w)
   h: 0 if x < 0
      1 if x > 0
-* We have 2 classes!
+
 * Express the result as a probability using logistic function (sigmoid)
+
+# Logistic regression
+
 * Recall: training set, what is our training set here?
 * New error formula, same as for ANN
 * Logistic regression
@@ -54,34 +30,33 @@ variable
 sigmoid function
 show pixels as input
 
-# 04-single-layer-perceptron
+# Single layer perceptron
 
 * what if we want multiple classes? We add neurons
 
 [PROGRESSIVE DIAGRAM]
 adding classes (and then neurons and links)
 
-# 05-non-linearly-separable-data
+# Artificial neural network
 
 * diagram of a non linearly-separable data set
 * we could use polynomials of higher degrees to represent our hypothesis
 function -> and then leave the bisounours linear world
 * what tells you that your problem is polynomialy separable?
 
-# 06-artificial-neural-network
 
 [BREAK]
 Make sure everyone is OK with what we talked about
 
-* Universal approximation theorem: any neural network can represent any
-continuous function
+* Universal approximation theorem: for any continuous function, there is a
+feed-forward neural network that computes it.
 
 [PROGRESSIVE DIAGRAM]
 adding a hidden layer
 
-# 07-backpropagation-algorithm
+# Backpropagation algorithm
 
-# 08-optimizations
+# Optimizations
 
 * momentum
 * overfitting
