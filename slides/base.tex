@@ -1,0 +1,54 @@
+\documentclass{beamer}
+
+\usepackage{listings}
+\usetheme{Warsaw}
+\usepackage[latin1]{inputenc}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\lstset{language=python,
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue}\ttfamily}
+
+\def\xcolorversion{2.00}
+\def\xkeyvalversion{1.8}
+\usepackage[version=0.96]{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning}
+
+\begin{document}
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+\section{Introduction}
+\tableofcontents[sectionstyle=show/shaded]
+\input{sections/01-introduction.tex}
+
+\section{Binary classification}
+\tableofcontents[sectionstyle=show/shaded]
+\input{sections/02-binary-classification.tex}
+
+\section{Logistic regression}
+\tableofcontents[sectionstyle=show/shaded]
+\input{sections/03-gradient-descent.tex}
+
+\section{Single layer perceptron}
+\tableofcontents[sectionstyle=show/shaded]
+\input{sections/04-single-layer-perceptron.tex}
+
+\section{Multilayer perceptron}
+\tableofcontents[sectionstyle=show/shaded]
+\input{sections/05-multilayer-perceptron.tex}
+
+\section{Backpropagation algorithm}
+\tableofcontents[sectionstyle=show/shaded]
+\input{sections/06-backpropagation-algorithm.tex}
+
+\section{Optimizations}
+\tableofcontents[sectionstyle=show/shaded]
+\tableofcontents[currentsection]
+\input{sections/07-optimizations.tex}
+\end{document}

@@ -1,0 +1,170 @@
+\begin{frame}
+\frametitle{Binary classifier}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+%
+  \node[style={font=\sffamily\Large\bfseries}] (1)
+  {\includegraphics[scale=0.14]{./pictures/kitten.png}};
+  \onslide<3>{
+    \node[main node] (2) [right of=1]
+    {$h(\raisebox{-0.2cm}{\includegraphics[scale=0.06]{./pictures/kitten.png}})$};
+    \node[main node] (3) [below right of=2] {$0$};
+    \node[main node] (4) [above right of=2] {$1$};
+  %
+    \path[every node/.style={font=\sffamily\small}]
+       (1) edge node [right] {} (2)
+       (2) edge node [right] {} (3)
+       (2) edge node [right] {} (4);
+     }
+  \onslide<2-3>{
+    \node (inA) [right=0.5cm of 4] {$\in A$};
+    \node (notinA) [right=0.5cm of 3] {$\notin A$};
+  }
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hypothesis function}
+  $h_w:
+  \left \{
+    \begin{array}{ccc}
+      \{0, 1\}^n & \to & \mathbb{N} \\
+      (x_1, \ldots, x_{n}) & \mapsto &
+      \displaystyle\sum_{i=1}^n{x_i w_i} \\
+    \end{array}
+  \right.$
+\end{frame}
+
+\begin{frame}
+  \frametitle{Step function}
+  To force the output of $h$ to be in $\{0, 1\}$, we define the step function:
+  \vspace{1cm}
+
+  $g:
+  \left \{
+    \begin{array}{ccc}
+      \mathbb{N} & \to & \{0, 1\} \\
+      x & \mapsto &
+      \begin{array}{cc}
+        1 & $if $ x >= 0 \\
+        0 & $otherwise$
+      \end{array}
+    \end{array}
+  \right.$
+\end{frame}
+
+\begin{frame}
+  \frametitle{}
+  $h_w:
+  \left \{
+    \begin{array}{ccc}
+      \{0, 1\}^n & \to & \mathbb{N} \\
+      (x_0, \ldots, x_{n - 1}) & \mapsto &
+      g \left( \displaystyle\sum_{i=0}^{n - 1}{x_i w_i} \right) \\
+    \end{array}
+  \right.$
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  image:
+  \nolinebreak
+  $
+  \left(
+    \begin{matrix}
+      0 & 0 & \colorbox{gray}{1} & \colorbox{gray}{1} & 0 & 0 \\
+      0 & \colorbox{gray}{1} & 0 & 0 & \colorbox{gray}{1} & 0 \\
+      0 & \colorbox{gray}{1} & 0 & 0 & 0 & 0 \\
+      0 & \colorbox{gray}{1} & 0 & 0 & 0 & 0 \\
+      0 & \colorbox{gray}{1} & 0 & 0 & \colorbox{gray}{1} & 0 \\
+      0 & 0 & \colorbox{gray}{1} & \colorbox{gray}{1} & 0 & 0
+    \end{matrix}
+  \right)
+  $
+  \newline
+  weights:
+  \nolinebreak
+  $
+  \only<1>{
+    \left(
+      \begin{matrix}
+        w0 & w1 & w2 & w3 & w4 & w5 \\
+        w6 & w7 & w8 & w9 & w10 & w11 \\
+        w12 & w13 & w14 & w15 & w16 & w17 \\
+        w18 & w19 & w20 & w21 & w22 & w23 \\
+        w24 & w25 & w26 & w27 & w28 & w29 \\
+        w30 & w31 & w32 & w33 & w34 & w35
+      \end{matrix}
+    \right)
+  }
+  \only<2>{
+    \left(
+    \begin{matrix}
+      -1 & -1 & \colorbox{gray}{1} & \colorbox{gray}{1} & -1 & -1 \\
+      -1 & \colorbox{gray}{1} & -1 & -1 & \colorbox{gray}{1} & -1 \\
+      -1 & \colorbox{gray}{1} & -1 & -1 & -1 & -1 \\
+      -1 & \colorbox{gray}{1} & -1 & -1 & -1 & -1 \\
+      -1 & \colorbox{gray}{1} & -1 & -1 & \colorbox{gray}{1} & -1 \\
+      -1 & -1 & \colorbox{gray}{1} & \colorbox{gray}{1} & -1 & -1
+    \end{matrix}
+    \right)
+  }
+  $
+\end{frame}
+
+\begin{frame}
+  \frametitle{Notation}
+  $
+  \begin{array}{cc}
+    &
+    \left(
+      \begin{matrix}
+        w_1 \\
+        \vdots \\
+        w_n
+      \end{matrix}
+    \right) \\
+    &\\
+    \left(
+      \begin{matrix}
+        x_1 & \ldots & x_{n}
+      \end{matrix}
+    \right) & \onslide<2>{\left( \displaystyle\sum_{i = 1}^n{x_i w_i} \right)}
+  \end{array}
+  $
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{block}{Step function}
+      \begin{lstlisting}
+def g(x):
+  if x >= 0:
+    return 1
+  else:
+    return 0
+      \end{lstlisting}
+  \end{block}
+\end{frame}
+
+% TODO graph
+
+\begin{frame}[fragile]
+  \begin{block}{Step function}
+      \begin{lstlisting}
+def g(x):
+  return x >= 0
+      \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{block}{}
+      \begin{lstlisting}
+def g(x):
+  return x >= 0
+
+def h(x, w):
+  return g(x * w)
+      \end{lstlisting}
+  \end{block}
+\end{frame}
