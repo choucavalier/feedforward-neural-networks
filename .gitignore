@@ -1,3 +1,8 @@
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
 *.pyc
 *.vrb
 *.toc
