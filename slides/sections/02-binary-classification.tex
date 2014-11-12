@@ -35,9 +35,21 @@
   \right.$
 \end{frame}
 
+\begin{frame}[fragile]
+  \begin{block}{Hypothesis function}
+      \begin{lstlisting}
+def h(x, w):
+  sum = 0
+  for i in range(len(x)):
+    sum += x[i] * w[i]
+  return sum
+      \end{lstlisting}
+  \end{block}
+\end{frame}
+
 \begin{frame}
   \frametitle{Step function}
-  To force the output of $h$ to be in $\{0, 1\}$, we define the step function:
+  To force the output of $h$ to be in $\{0, 1\}$, we use the Heaviside step function:
   \vspace{1cm}
 
   $g:
@@ -54,13 +66,41 @@
 \end{frame}
 
 \begin{frame}
+  \begin{center}
+    \includegraphics[scale=0.4]{./pictures/step_function.png}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{block}{Step function}
+      \begin{lstlisting}
+def g(x):
+  if x >= 0:
+    return 1
+  else:
+    return 0
+      \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{block}{Step function}
+      \begin{lstlisting}
+def g(x):
+  return x >= 0
+      \end{lstlisting}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
   \frametitle{}
   $h_w:
   \left \{
     \begin{array}{ccc}
-      \{0, 1\}^n & \to & \mathbb{N} \\
-      (x_0, \ldots, x_{n - 1}) & \mapsto &
-      g \left( \displaystyle\sum_{i=0}^{n - 1}{x_i w_i} \right) \\
+      \{0, 1\}^n & \to & \{0, 1\} \\
+      (x_1, \ldots, x_{n}) & \mapsto &
+      g \left( \displaystyle\sum_{i=1}^{n}{x_i w_i} \right) \\
     \end{array}
   \right.$
 \end{frame}
@@ -100,6 +140,18 @@
   \only<2>{
     \left(
     \begin{matrix}
+      0 & 0 & \colorbox{gray}{1} & \colorbox{gray}{1} & 0 & 0 \\
+      0 & \colorbox{gray}{1} & 0 & 0 & \colorbox{gray}{1} & 0 \\
+      0 & \colorbox{gray}{1} & 0 & 0 & 0 & 0 \\
+      0 & \colorbox{gray}{1} & 0 & 0 & 0 & 0 \\
+      0 & \colorbox{gray}{1} & 0 & 0 & \colorbox{gray}{1} & 0 \\
+      0 & 0 & \colorbox{gray}{1} & \colorbox{gray}{1} & 0 & 0
+    \end{matrix}
+    \right)
+  }
+  \only<3>{
+    \left(
+    \begin{matrix}
       -1 & -1 & \colorbox{gray}{1} & \colorbox{gray}{1} & -1 & -1 \\
       -1 & \colorbox{gray}{1} & -1 & -1 & \colorbox{gray}{1} & -1 \\
       -1 & \colorbox{gray}{1} & -1 & -1 & -1 & -1 \\
@@ -116,46 +168,28 @@
   \frametitle{Notation}
   $
   \begin{array}{cc}
-    &
-    \left(
-      \begin{matrix}
-        w_1 \\
-        \vdots \\
-        w_n
-      \end{matrix}
-    \right) \\
+    \onslide<2>{
+      &
+      \left(
+        \begin{matrix}
+          w_1 \\
+          \vdots \\
+          w_n
+        \end{matrix}
+      \right) \\}
     &\\
-    \left(
+    \onslide<2>{\left(
       \begin{matrix}
         x_1 & \ldots & x_{n}
       \end{matrix}
-    \right) & \onslide<2>{\left( \displaystyle\sum_{i = 1}^n{x_i w_i} \right)}
+    \right)} & {\left( \displaystyle\sum_{i = 1}^n{x_i w_i} \right)}
   \end{array}
+  \onslide<2>{\hspace{2em}
+    h = g(\textbf{x} \cdot \textbf{w})}
   $
 \end{frame}
 
-\begin{frame}[fragile]
-  \begin{block}{Step function}
-      \begin{lstlisting}
-def g(x):
-  if x >= 0:
-    return 1
-  else:
-    return 0
-      \end{lstlisting}
-  \end{block}
-\end{frame}
-
 % TODO graph
-
-\begin{frame}[fragile]
-  \begin{block}{Step function}
-      \begin{lstlisting}
-def g(x):
-  return x >= 0
-      \end{lstlisting}
-  \end{block}
-\end{frame}
 
 \begin{frame}[fragile]
   \begin{block}{}
