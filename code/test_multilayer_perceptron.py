@@ -23,8 +23,8 @@ t = [
     ([1, 0], [0, 1]),
     ([1, 1], [1, 0])]
 
-# Use matrix instead of lists.
-t = [(matrix(x), matrix(y)) for x, y in t]
+# Use column matrices instead of lists.
+t = [(transpose(matrix(x)), transpose(matrix(y))) for x, y in t]
 
 # Start with two random weights matrices.
 w = [random.rand(3, 3), random.rand(4, 2)]

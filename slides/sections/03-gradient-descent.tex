@@ -40,6 +40,49 @@
     \end{center}
   \end{frame}
 
+    \begin{frame}
+      \frametitle{The logistic function}
+      \begin{center}
+        \includegraphics[scale=0.14]{./pictures/sigmoid.png}
+      \end{center}
+    \end{frame}
+
+\begin{frame}
+  \frametitle{The logistic function}
+  $g:
+  \left \{
+    \begin{array}{ccc}
+      \mathbb{R} & \to & \left]0, 1\right[ \\
+      x & \mapsto & \frac{1}{1 + e^{-x}}
+    \end{array}
+  \right.$
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{block}{Logistic function}
+    \begin{lstlisting}
+  def g(x):
+      1 / (1 + exp(-x))
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,draw,minimum size=17pt,inner sep=0pt]
+
+    \foreach \y in {1,2,3,4}
+    \node[neuron, pin=left:$x\y$] (I-\y) at (0,-\y) {};
+
+    \node[neuron,pin={[pin edge={->}]right:$P(x \in A)$}, right of=I-3] (O-1) at
+    (1.2,-2.5) {$g(x \cdot w)$};
+
+    \foreach \src in {1,2,3,4}
+    \path (I-\src) edge (O-1);
+  \end{tikzpicture}
+\end{frame}
+
   \begin{frame}
     \frametitle{The error function}
     \begin{center}
@@ -59,13 +102,6 @@
     \end{frame}
 
     \begin{frame}
-      \frametitle{The logistic function}
-      \begin{center}
-        \includegraphics[scale=0.14]{./pictures/sigmoid.png}
-      \end{center}
-    \end{frame}
-
-    \begin{frame}
       \frametitle{Error function}
       \begin{center}
         \includegraphics[scale=0.22]{./pictures/error_function.png}
@@ -75,26 +111,29 @@
     \begin{frame}
       \begin{equation*}
         \begin{split}
-          \frac{\partial e}{\partial w} & = \frac{\partial \displaystyle\sum_{i =
+          \frac{\partial e}{\partial w\only<1>{_i}} & = \frac{\partial \displaystyle\sum_{i =
         1}^n{-y \log(h_w(x)) - (1 - y) \log(1 -
-      h_w(x)})}{\partial w} \\~\\
-      & = \displaystyle\sum_{i = 1}^n{\frac{\partial(-y \log(g(x \cdot
-  w)) - (1 - y) \log(1 - g(x \cdot w)))}{\partial w}} \\
+      h_w(x)})}{\partial w\only<1>{_i}} \\~\\
+      & = x\only<1>{_i} \cdot (h_w(x) - y)\\~\\
+      \onslide<2>{~}
 \end{split}
   \end{equation*}
 \end{frame}
 
-\begin{frame}
-  \begin{equation*}
-    E(w)
-  \end{equation*}
+\begin{frame}[fragile]
+  \begin{block}{}
+    \begin{lstlisting}
+def gradient(x, y, w):
+    return x * (h(x, w) - y)
+    \end{lstlisting}
+  \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-  \begin{block}{Logistic function}
+  \begin{block}{Gradient descent}
     \begin{lstlisting}
-      def g(x):
-      1 / (1 + exp(-x))
+def learn(x, y, w, a):
+    return w - a * gradient(x, y, w)
     \end{lstlisting}
   \end{block}
 \end{frame}
@@ -104,22 +143,6 @@
   \begin{center}
     \includegraphics[scale=0.22]{./pictures/gradient_descent.png}
   \end{center}
-\end{frame}
-
-\begin{frame}
-  \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
-    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-    \tikzstyle{neuron}=[circle,draw,minimum size=17pt,inner sep=0pt]
-
-    \foreach \y in {1,2,3,4}
-    \node[neuron, pin=left:$x\y$] (I-\y) at (0,-\y) {};
-
-    \node[neuron,pin={[pin edge={->}]right:$y1$}, right of=I-3] (O-1) at
-    (1.2,-2.5) {$g(\textbf{x} \cdot \textbf{w})$};
-
-    \foreach \src in {1,2,3,4}
-    \path (I-\src) edge (O-1);
-  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
@@ -148,6 +171,7 @@
 
 \begin{frame}
 \begin{center}
+  \frametitle{Bias}
   $
   \begin{array}{cc}
       &
@@ -164,11 +188,31 @@
       \begin{matrix}
         \only<2>{1 &} x_1 & \ldots & x_{n}
       \end{matrix}
-    \right) & {\left(\textbf{x} \cdot \textbf{w} \right)}
+    \right) & {\left(x \cdot w \right)}
   \end{array}
   \hspace{2em}
   $
 \only<1>{\includegraphics[scale=0.3]{./pictures/linear.png}}
 \only<2>{\includegraphics[scale=0.3]{./pictures/affine.png}}
 \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{block}{Logistic function}
+    \begin{lstlisting}
+from numpy import exp, transpose
+
+def g(x):
+    return 1 / (1 + exp(-x))
+
+def h(x, w):
+    return g(transpose(w) * x)
+
+def gradient(x, y, w):
+    return x * (h(x, w) - y)
+
+def learn(x, y, w, a):
+    return w - a * gradient(x, y, w)
+    \end{lstlisting}
+  \end{block}
 \end{frame}

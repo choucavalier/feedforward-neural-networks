@@ -24,13 +24,19 @@
 \end{frame}
 
 \begin{frame}
+  \begin{center}
+    \includegraphics[scale=0.2]{./pictures/logreg_db078.png}
+  \end{center}
+\end{frame}
+
+\begin{frame}
   \frametitle{Hypothesis function}
   $h_w:
   \left \{
     \begin{array}{ccc}
       \{0, 1\}^n & \to & \mathbb{N} \\
       (x_1, \ldots, x_{n}) & \mapsto &
-      \displaystyle\sum_{i=1}^n{x_i w_i} \\
+      \displaystyle\sum_{i=1}^n{w_i x_i} \\
     \end{array}
   \right.$
 \end{frame}
@@ -39,11 +45,44 @@
   \begin{block}{Hypothesis function}
       \begin{lstlisting}
 def h(x, w):
-  sum = 0
-  for i in range(len(x)):
-    sum += x[i] * w[i]
-  return sum
+    sum = 0
+    for i in range(len(x)):
+        sum += w[i] * x[i]
+    return sum
       \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Notation}
+  $
+  \begin{array}{cc}
+    \onslide<2>{
+      &
+      \left(
+        \begin{matrix}
+          x_1 \\
+          \vdots \\
+          x_n
+        \end{matrix}
+      \right) \\}
+    &\\
+    \onslide<2>{\left(
+      \begin{matrix}
+        w_1 & \ldots & w_{n}
+      \end{matrix}
+    \right)} & {\left( \displaystyle\sum_{i = 1}^n{w_i x_i} \right)}
+  \end{array}
+  $
+\end{frame}
+
+\begin{frame}[fragile]
+  \hspace{2em}
+  \begin{block}{Hypothesis}
+    \begin{lstlisting}
+def h(x, w):
+    return transpose(w) * x
+    \end{lstlisting}
   \end{block}
 \end{frame}
 
@@ -75,10 +114,10 @@ def h(x, w):
   \begin{block}{Step function}
       \begin{lstlisting}
 def g(x):
-  if x >= 0:
-    return 1
-  else:
-    return 0
+    if x >= 0:
+        return 1
+    else:
+        return 0
       \end{lstlisting}
   \end{block}
 \end{frame}
@@ -87,7 +126,7 @@ def g(x):
   \begin{block}{Step function}
       \begin{lstlisting}
 def g(x):
-  return x >= 0
+    return x >= 0
       \end{lstlisting}
   \end{block}
 \end{frame}
@@ -99,10 +138,19 @@ def g(x):
   \left \{
     \begin{array}{ccc}
       \{0, 1\}^n & \to & \{0, 1\} \\
-      (x_1, \ldots, x_{n}) & \mapsto &
-      g \left( \displaystyle\sum_{i=1}^{n}{x_i w_i} \right) \\
+      x & \mapsto &
+      g(w^T x) \\
     \end{array}
   \right.$
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{block}{}
+      \begin{lstlisting}
+def h(x, w):
+    return g(transpose(w) * x)
+      \end{lstlisting}
+  \end{block}
 \end{frame}
 
 \begin{frame}
@@ -165,40 +213,17 @@ def g(x):
 \end{frame}
 
 \begin{frame}
-  \frametitle{Notation}
-  $
-  \begin{array}{cc}
-    \onslide<2>{
-      &
-      \left(
-        \begin{matrix}
-          w_1 \\
-          \vdots \\
-          w_n
-        \end{matrix}
-      \right) \\}
-    &\\
-    \onslide<2>{\left(
-      \begin{matrix}
-        x_1 & \ldots & x_{n}
-      \end{matrix}
-    \right)} & {\left( \displaystyle\sum_{i = 1}^n{x_i w_i} \right)}
-  \end{array}
-  \onslide<2>{\hspace{2em}
-    h = g(\textbf{x} \cdot \textbf{w})}
-  $
-\end{frame}
+  \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,draw,minimum size=17pt,inner sep=0pt]
 
-% TODO graph
+    \foreach \y in {1,2,3,4}
+    \node[neuron, pin=left:$x\y$] (I-\y) at (0,-\y) {};
 
-\begin{frame}[fragile]
-  \begin{block}{}
-      \begin{lstlisting}
-def g(x):
-  return x >= 0
+    \node[neuron,pin={[pin edge={->}]right:$y$}, right of=I-3] (O-1) at
+    (1.2,-2.5) {$g(x \cdot w)$};
 
-def h(x, w):
-  return g(x * w)
-      \end{lstlisting}
-  \end{block}
+    \foreach \src in {1,2,3,4}
+    \path (I-\src) edge (O-1);
+  \end{tikzpicture}
 \end{frame}

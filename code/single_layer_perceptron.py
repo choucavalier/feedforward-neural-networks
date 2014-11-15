@@ -9,7 +9,7 @@ def g(x):
 # Hypthesis: the prediction of our model for input x when parametrized with
 # weights w.
 def h(x, w):
-    return g(x * w)
+    return g(transpose(w) * x)
 
 # Gradient of the error function with respect to the weights w.
 def gradient(x, y, w):
@@ -33,8 +33,8 @@ def gradient(x, y, w):
     #              ...        ...        ...         
     #      x[i] * (o - y)[0]  ...  x[i] * (o - y)[j] 
     #
-    # which is the multiplication of the transpose of x with (o - y).
-    return transpose(x) * (h(x, w) - y)
+    # which is the multiplication of x with the transpose of (o - y).
+    return x * transpose((h(x, w) - y))
 
 # Adjust the weights using gradient descent.
 def learn(x, y, w, a):

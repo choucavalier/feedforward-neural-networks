@@ -51,11 +51,10 @@ for i in range(10):
 
     t.append((x, y))
 
-# Add bias and use matrix instead of lists for inputs.
-t = [(matrix([1] + x), y) for x, y in t]
+# Add bias and use column matrices instead of lists for inputs.
+t = [(transpose(matrix([1] + x)), y) for x, y in t]
 
-# Start with random weights. This is a column matrix with as many rows as
-# inputs.
+# Start with random weights. t[0][0].size is the number of inputs.
 w = random.rand(t[0][0].size, 1)
 
 fig1 = plt.figure(0)

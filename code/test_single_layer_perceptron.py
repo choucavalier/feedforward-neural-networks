@@ -23,11 +23,11 @@ t = [
     ([1, 0], [0, 1]),
     ([1, 1], [1, 1])]
 
-# Add bias and use matrix instead of lists.
-t = [(matrix([1] + x), matrix(y)) for x, y in t]
+# Add bias and use column matrices instead of lists.
+t = [(transpose(matrix([1] + x)), transpose(matrix(y))) for x, y in t]
 
-# Start with random weights. There are as many rows as inputs and as many
-# columns as outputs.
+# Start with random weights. t[0][0].size is the number of inputs, and
+# t[0][1].size is the number of outputs.
 w = random.rand(t[0][0].size, t[0][1].size)
 
 print(error_tot(t, w))
@@ -39,4 +39,4 @@ for i in range(1, 101):
 print()
 # For each input, show what the model has learnt.
 for x, y in t:
-    print('h(', x, ') = ', h(x, w))
+    print('h(', transpose(x), ') = ', h(x, w))

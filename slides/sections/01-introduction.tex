@@ -80,3 +80,89 @@
     \path (H-\src) edge (O-\dst);
   \end{tikzpicture}
 \end{frame}
+
+\begin{frame}
+  \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,draw,minimum size=17pt,inner sep=0pt]
+    \node[neuron, pin=left:$x$] (I) at (0,0) {};
+    \node[neuron] (H) [right of=I] {};
+    \node[neuron,pin={[pin edge={->}]right:$y$}, right of=H] (O) {};
+    \path (I) edge (H);
+    \path (H) edge (O);
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Prerequisites}
+  \begin{itemize}
+    \item Partial derivative of composed functions
+    \item Matrix multiplication
+    \item Some python
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Derivative of composed functions}
+  \begin{equation*}
+    \begin{split}
+      \frac{(f \circ g \circ h)(x, y)}{\partial x}& = \frac{\partial f}{\partial g} \cdot
+      \frac{\partial g}{\partial h} \cdot \frac{\partial h}{\partial x}
+    \end{split}
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrix multiplication}
+  $
+  \begin{array}{cc}
+      &
+      \left(
+        \begin{matrix}
+          b_{11} & \ldots & b_{12} \\
+          \vdots & & \vdots \\
+          b_{n1} & \ldots & b_{np}
+        \end{matrix}
+      \right) \\
+    &\\
+    \left(
+      \begin{matrix}
+        a_{11} & \ldots & a_{1n}
+      \end{matrix}
+    \right) & \left( {c_{11} \ldots c_{1p}} \right)
+  \end{array}
+  $
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Python}
+  \begin{block}{}
+    \begin{lstlisting}
+def foo(x):
+    l1 = [1, 2, 3, 4]
+    l2 = [5, 6, 7, 8]
+    for elt in l:
+        print(x + elt)
+    for i in range(len(l1)):
+        print(x * l1[i] + l2[i])
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Numpy}
+  \begin{block}{}
+    \begin{lstlisting}
+from numpy import matrix
+
+a = matrix([
+    [1, 2, 3],
+    [4, 5, 6]]
+b = matrix([
+    [6, 5],
+    [4, 3],
+    [2, 1]])
+c = a * b
+    \end{lstlisting}
+  \end{block}
+\end{frame}
