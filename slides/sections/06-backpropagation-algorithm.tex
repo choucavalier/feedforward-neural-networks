@@ -264,7 +264,7 @@ def gradient(out, y, w):
     for l in range(len(out))[1:-1][::-1]:|\pause|
         d_out = w[l][1:] * d|\pause|
         d = multiply(d_out, multiply(out[l], 1 - out[l]))|\pause|
-        x = insert(out[l - 1], 0, 1, axis=0)|\pause|
+        x = add_bias(out[l - 1])|\pause|
         grad = [x * transpose(d)] + grad|\pause|
     return grad
     \end{lstlisting}
