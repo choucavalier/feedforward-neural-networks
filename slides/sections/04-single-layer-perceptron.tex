@@ -29,28 +29,6 @@
   $
 \end{frame}
 
-\begin{frame}[fragile]
-  \hspace{2em}
-  \begin{block}{Hypothesis}
-    \begin{lstlisting}
-def g(x):
-    return x >= 0
-
-def h(x, w):
-    return transpose(w) * x
-    \end{lstlisting}
-  \end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-  \begin{block}{Hypothesis function}
-      \begin{lstlisting}
-def gradient(x, y, w):
-    return x * transpose((h(x, w) - y))
-      \end{lstlisting}
-  \end{block}
-\end{frame}
-
 \begin{frame}
   \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
     \tikzstyle{every pin edge}=[<-,shorten <=1pt]
@@ -76,4 +54,63 @@ def gradient(x, y, w):
     {\path[draw=red] (I-\src) edge (O-\dst)}
     {\path[draw=black!50] (I-\src) edge (O-\dst)};
   \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]
+  \hspace{2em}
+  \begin{block}{Hypothesis}
+    \begin{lstlisting}
+def g(x):
+    return 1 / (1 + exp(x))
+
+def h(x, w):
+    return transpose(w) * x
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{block}{Hypothesis function}
+      \begin{lstlisting}
+def gradient(x, y, w):
+    d = h(x, w) - y
+    return x * transpose(d)
+      \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  $
+  \begin{array}{cc}
+    &
+    \left(
+      \begin{matrix}
+        d\only<2>{_1& \ldots & d_{m}} \\
+      \end{matrix}
+    \right) \\
+    &\\
+    \left(
+      \begin{matrix}
+        x_{1} \\
+        \vdots \\
+        x_{n}
+      \end{matrix}
+    \right) & \left(
+      \only<1>{\begin{matrix}
+        x_0 d \\
+        \vdots \\
+        x_n d
+      \end{matrix}}
+      \only<2>{\begin{matrix}
+        x_0 d_0 & \ldots & x_0 d_m \\
+        \vdots & \ddots & \vdots \\
+        x_n d_0 & \ldots & x_n d_m
+      \end{matrix}}
+    \right)
+  \end{array}
+  \qquad \frac{\partial E}{\partial w_{i\only<2>{j}}} = x_i d\only<2>{_j}
+  $
 \end{frame}

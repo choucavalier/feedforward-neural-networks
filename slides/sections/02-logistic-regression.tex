@@ -53,39 +53,6 @@ def h(x, w):
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Notation}
-  $
-  \begin{array}{cc}
-    \onslide<2>{
-      &
-      \left(
-        \begin{matrix}
-          x_1 \\
-          \vdots \\
-          x_n
-        \end{matrix}
-      \right) \\}
-    &\\
-    \onslide<2>{\left(
-      \begin{matrix}
-        w_1 & \ldots & w_{n}
-      \end{matrix}
-    \right)} & {\left( \displaystyle\sum_{i = 1}^n{w_i x_i} \right)}
-  \end{array}
-  $
-\end{frame}
-
-\begin{frame}[fragile]
-  \hspace{2em}
-  \begin{block}{Hypothesis}
-    \begin{lstlisting}
-def h(x, w):
-    return transpose(w) * x
-    \end{lstlisting}
-  \end{block}
-\end{frame}
-
 \begin{frame}
   \frametitle{Step function}
   To force the output of $h$ to be in $\{0, 1\}$, we use the Heaviside step function:
@@ -139,7 +106,7 @@ def g(x):
     \begin{array}{ccc}
       \{0, 1\}^n & \to & \{0, 1\} \\
       x & \mapsto &
-      g(w^T x) \\
+      g\left(\displaystyle\sum_{k = 1}^n{w_i x_i}\right) \\
     \end{array}
   \right.$
 \end{frame}
@@ -148,7 +115,10 @@ def g(x):
   \begin{block}{}
       \begin{lstlisting}
 def h(x, w):
-    return g(transpose(w) * x)
+    acc = 0
+    for i in range(len(x)):
+        acc += w[i] * x[i]
+    return g(acc)
       \end{lstlisting}
   \end{block}
 \end{frame}
@@ -211,6 +181,40 @@ def h(x, w):
   }
   $
 \end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Notation}
+  $
+  \begin{array}{cc}
+    \onslide<2>{
+      &
+      \left(
+        \begin{matrix}
+          x_1 \\
+          \vdots \\
+          x_n
+        \end{matrix}
+      \right) \\}
+    &\\
+    \onslide<2>{\left(
+      \begin{matrix}
+        w_1 & \ldots & w_{n}
+      \end{matrix}
+    \right)} & {\left( \displaystyle\sum_{i = 1}^n{w_i x_i} \right)}
+  \end{array}
+  $
+\end{frame}
+
+\begin{frame}[fragile]
+  \hspace{2em}
+  \begin{block}{Hypothesis}
+    \begin{lstlisting}
+def h(x, w):
+    return g(transpose(w) * x)
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
 
 \begin{frame}
   \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
