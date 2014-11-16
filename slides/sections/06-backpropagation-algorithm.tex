@@ -140,9 +140,6 @@
 \begin{frame}[fragile]
   \begin{block}{Backpropagation}
     \begin{lstlisting}
-def add_bias(o):
-    return insert(o, 0, 1, axis=0)
-
 def gradient(out, y, w):
     L = len(out) - 1
     x = add_bias(out[L - 1])
@@ -263,12 +260,12 @@ def gradient(out, y, w):
     x = insert(out[L - 1], 0, 1, axis=0)
     d = out[L] - y
     grad = [x * transpose(d)]
-
-    for l in range(len(out))[1:-1][::-1]:
-        d_out = w[l][1:] * d
-        d = multiply(d_out, multiply(out[l], 1 - out[l]))
-        x = insert(out[l - 1], 0, 1, axis=0)
-        grad = [x * transpose(d)] + grad
+|\pause|
+    for l in range(len(out))[1:-1][::-1]:|\pause|
+        d_out = w[l][1:] * d|\pause|
+        d = multiply(d_out, multiply(out[l], 1 - out[l]))|\pause|
+        x = insert(out[l - 1], 0, 1, axis=0)|\pause|
+        grad = [x * transpose(d)] + grad|\pause|
     return grad
     \end{lstlisting}
   \end{block}

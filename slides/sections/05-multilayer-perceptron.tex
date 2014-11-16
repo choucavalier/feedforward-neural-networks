@@ -25,12 +25,15 @@
 \begin{frame}[fragile]
   \begin{block}{Forward propagation}
     \begin{lstlisting}
+def add_bias(o):
+    return insert(o, 0, 1, axis=0)
+|\pause|
 def h(x, w):
-    out = [x]
-    for l in range(len(w)):
-        x = insert(out[l], 0, 1, axis=0)
-        o = g(transpose(w[l]) * x)
-        out.append(o)
+    out = [x]|\pause|
+    for l in range(len(w)):|\pause|
+        x = add_bias(out[l])|\pause|
+        o = g(transpose(w[l]) * x)|\pause|
+        out.append(o)|\pause|
     return out
   \end{lstlisting}
   \end{block}
