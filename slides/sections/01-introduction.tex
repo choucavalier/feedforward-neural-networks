@@ -66,7 +66,7 @@
     % output layer node
     \foreach \y in {1,2}
     \path[yshift=-1cm]
-    node[neuron,pin={[pin edge={->}]right:$y\y$}, right of=H-2] (O-\y) at (2.7,-\y) {};
+    node[neuron,pin={[pin edge={->}]right:$o\y$}] (O-\y) at (4.5,-\y) {};
 
     % Connect every node in the input layer with every node in the
     % hidden layer.
@@ -78,18 +78,6 @@
     \foreach \src in {1,...,5}
     \foreach \dst in {1,2}
     \path (H-\src) edge (O-\dst);
-  \end{tikzpicture}
-\end{frame}
-
-\begin{frame}
-  \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
-    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-    \tikzstyle{neuron}=[circle,draw,minimum size=17pt,inner sep=0pt]
-    \node[neuron, pin=left:$x$] (I) at (0,0) {};
-    \node[neuron] (H) [right of=I] {};
-    \node[neuron,pin={[pin edge={->}]right:$y$}, right of=H] (O) {};
-    \path (I) edge (H);
-    \path (H) edge (O);
   \end{tikzpicture}
 \end{frame}
 
@@ -116,21 +104,30 @@
   \frametitle{Matrix multiplication}
   $
   \begin{array}{cc}
-      &
-      \left(
-        \begin{matrix}
-          b_{11} & \ldots & b_{12} \\
-          \vdots & & \vdots \\
-          b_{n1} & \ldots & b_{np}
-        \end{matrix}
-      \right) \\
+    &
+    \left(
+      \begin{matrix}
+        b_{11} & \ldots & b_{12} \\
+        \vdots & \ddots & \vdots \\
+        b_{n1} & \ldots & b_{np}
+      \end{matrix}
+    \right) \\
     &\\
     \left(
       \begin{matrix}
-        a_{11} & \ldots & a_{1n}
+        a_{11} & \ldots & a_{1n} \\
+        \vdots & \ddots & \vdots \\
+        a_{m1} & \ldots & a_{mn}
       \end{matrix}
-    \right) & \left( {c_{11} \ldots c_{1p}} \right)
+    \right) & \left(
+      \begin{matrix}
+        c_{11} & \ldots & c_{1p} \\
+        \vdots & \ddots & \vdots \\
+        c_{m1} & \ldots & c_{mp}
+      \end{matrix}
+    \right)
   \end{array}
+  \qquad c_{ij} = \displaystyle\sum_{k=1}^n{a_{ik} b_{kj}}
   $
 \end{frame}
 

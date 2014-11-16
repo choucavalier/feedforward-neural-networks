@@ -1,4 +1,7 @@
-from numpy import matrix, multiply, exp, transpose, append
+from numpy import matrix, multiply, exp, transpose, insert
+
+def add_bias(o):
+    return insert(o, 0, 1, axis=0)
 
 # Logistic function.
 # N.B. The function is defined for vectors.
@@ -15,10 +18,10 @@ def h(x, w):
 
     for l in range(len(w)):
         # Add bias to previous layer's output
-        x = append(matrix([1]), out[l], axis=0)
+        x = add_bias(out[l])
 
         # Append output to the list of outputs.
-        out.append(g(transpose(w[l]) * x))
+        out = out + [g(transpose(w[l]) * x)]
 
     # Note that out has one more element than w, which is perfectly normal:
     #           w0             w1
@@ -34,7 +37,7 @@ def gradient(out, y, w):
     L = len(out) - 1
 
     # Input of last layer = output of previous layer + bias.
-    x = append(matrix([1]), out[L - 1], axis=0)
+    x = add_bias(out[L - 1])
 
     # Gradient is the same as for logistic regression, but we store the value
     # out[L] - y because we need it to compute the previous layer's gradient.
@@ -56,7 +59,7 @@ def gradient(out, y, w):
         d = multiply(d_out, multiply(out[l], 1 - out[l]))
 
         # Current layer's input = previous layer's output + bias.
-        x = append(matrix([1]), out[l - 1], axis=0)
+        x = add_bias(out[l - 1])
 
         # Derivative of the error with respect to the current layer's weights.
         grad = [x * transpose(d)] + grad

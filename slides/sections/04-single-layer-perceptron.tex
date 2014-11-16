@@ -1,17 +1,54 @@
-\begin{frame}
-  \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
-    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-    \tikzstyle{neuron}=[circle,draw,minimum size=17pt,inner sep=0pt]
+\begin{frame}[fragile]
+  \frametitle{Notation}
+  $
+  \begin{array}{cc}
+      &
+      \left(
+        \begin{matrix}
+          x_0 \\
+          \vdots \\
+          x_n
+        \end{matrix}
+      \right) \\
+    &\\
+    \left(
+      \begin{matrix}
+        w_{\only<2>{0}0} & \ldots & w_{\only<2>{0}n} \only<2>{\\
+        \vdots & \ddots & \vdots \\
+      w_{m0} & \ldots & w_{mn}}
+      \end{matrix}
+  \right) & {\left(
+      \begin{matrix}
+        net\only<2>{_0} \only<2>{\\
+          \vdots \\
+        net\only<2>{_m}}
+      \end{matrix}
+  \right)}
+  \end{array}
+  \qquad net = w^T \cdot x
+  $
+\end{frame}
 
-    \foreach \y in {1,2,3,4}
-    \node[neuron, pin=left:$x\y$] (I-\y) at (0,-\y) {};
+\begin{frame}[fragile]
+  \hspace{2em}
+  \begin{block}{Hypothesis}
+    \begin{lstlisting}
+def g(x):
+    return x >= 0
 
-    \node[neuron,pin={[pin edge={->}]right:$P(x \in A)$}, right of=I-3] (O-1) at
-    (1.2,-2.5) {};
+def h(x, w):
+    return transpose(w) * x
+    \end{lstlisting}
+  \end{block}
+\end{frame}
 
-    \foreach \src in {1,2,3,4}
-    \path (I-\src) edge (O-1);
-  \end{tikzpicture}
+\begin{frame}[fragile]
+  \begin{block}{Hypothesis function}
+      \begin{lstlisting}
+def gradient(x, y, w):
+    return x * transpose((h(x, w) - y))
+      \end{lstlisting}
+  \end{block}
 \end{frame}
 
 \begin{frame}
@@ -25,11 +62,11 @@
 
     % output layer node
     \path[yshift=-1.4cm]
-    node[neuron,pin={[pin edge={->}]right:$P(x \in A)$}] (O-1) at (2.5,0) {};
+    node[neuron,pin={[pin edge={->}]right:$o1 = P(x \in A)$}] (O-1) at (2.5,0) {};
     \path[yshift=-1.4cm]
-    node[neuron,pin={[pin edge={->}]right:$P(x \in B)$}] (O-2) at (2.5,-1) {};
+    node[neuron,pin={[pin edge={->}]right:$o2 = P(x \in B)$}] (O-2) at (2.5,-1) {};
     \path[yshift=-1.4cm]
-    node[neuron,pin={[pin edge={->}]right:$P(x \in C)$}] (O-3) at (2.5,-2) {};
+    node[neuron,pin={[pin edge={->}]right:$o3 = P(x \in C)$}] (O-3) at (2.5,-2) {};
 
     % Connect every node in the input layer with every node in the
     % output layer.
