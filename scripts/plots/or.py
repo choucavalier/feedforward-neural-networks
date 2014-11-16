@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+font = { 'family': 'normal', 'weight': 'bold', 'size': 30 }
+plt.rc('font', **font)
+
 x = [0, 0, 1, 1]
 y = [0, 1, 0, 1]
 colors = ['#ffffff', '#000000', '#000000', '#000000']
@@ -18,4 +21,4 @@ liney = [0.8, -0.2]
 
 plt.plot(linex, liney)
 
-plt.show()
+plt.savefig('or.png')
