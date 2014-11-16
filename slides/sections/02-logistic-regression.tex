@@ -45,10 +45,10 @@
   \begin{block}{Hypothesis function}
       \begin{lstlisting}
 def h(x, w):
-    sum = 0
+    acc = 0
     for i in range(len(x)):
-        sum += w[i] * x[i]
-    return sum
+        acc += w[i] * x[i]
+    return acc
       \end{lstlisting}
   \end{block}
 \end{frame}
