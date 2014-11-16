@@ -50,6 +50,7 @@
 \end{frame}
 
 \begin{frame}
+  \begin{center}
   \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
     \tikzstyle{every pin edge}=[<-,shorten <=1pt]
     \tikzstyle{neuron}=[circle,draw,minimum size=17pt,inner sep=0pt]
@@ -79,6 +80,7 @@
     \foreach \dst in {1,2}
     \path (H-\src) edge (O-\dst);
   \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -94,8 +96,8 @@
   \frametitle{Derivative of composed functions}
   \begin{equation*}
     \begin{split}
-      \frac{(f \circ g \circ h)(x, y)}{\partial x}& = \frac{\partial f}{\partial g} \cdot
-      \frac{\partial g}{\partial h} \cdot \frac{\partial h}{\partial x}
+      f(g(h(x)))' & = f'(g(h(x))) g'(h(x)) h'(x) \\
+      & = \frac{d f}{d g} \cdot \frac{d g}{d h} \cdot \frac{d h}{d x}
     \end{split}
   \end{equation*}
 \end{frame}
