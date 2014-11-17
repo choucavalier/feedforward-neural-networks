@@ -1,18 +1,24 @@
-\subsection{The Enemy}
+\subsection{Overfitting}
 
-\begin{frame}[c]{Overfitting}
+\begin{frame}[c]{}
   \begin{center}
     \includegraphics[scale=0.6]{./pictures/overfitting.png}
   \end{center}
 \end{frame}
+
+\begin{frame}
+  \begin{equation*}
+    E(w) = -y \log(o) - (1 - y)(1 - o) \mathbf{+ \lambda \displaystyle\sum_{i, j}{w_{ij}^2}}
+  \end{equation*}
+\end{frame}
+
+\subsection{Local minima}
 
 \begin{frame}[c]{Local Minima}
   \begin{center}
     \includegraphics[scale=0.095]{./pictures/local_minima.png}
   \end{center}
 \end{frame}
-
-\subsection{Our weapons}
 
 \begin{frame}[c]{Momentum}
   \begin{itemize}
@@ -21,6 +27,11 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Average multiple networks}
+\begin{center}
+  \Large{$o = \frac{h_{w_1}(x) + \cdots + h_{w_n}(x)}{n}$}
+\end{center}
+\end{frame}
+
 % momentum
 % regularization
-% average multiple networks
