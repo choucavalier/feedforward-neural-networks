@@ -264,8 +264,11 @@
   \end{equation*}
 \end{frame}
 
-\begin{frame}{Backpropagation: last layer}
+\begin{frame}
+\SetKwProg{Fn}{}{}{end}\SetKwFunction{BackProp}{BackPropagation}
 \begin{algorithm}[H]
+\Fn(){\BackProp{o, y, w}}{
+\only<1>{
 $x \gets add\_bias(o^{L-1})$\;
 \ForEach{j}{
   $\delta^L_j \gets o^L_j - y_j$\;
@@ -273,12 +276,11 @@ $x \gets add\_bias(o^{L-1})$\;
 \ForEach{i, j}{
   $grad^L_{ij} \gets x_i \delta^L_j$\;
 }
-\end{algorithm}
-\end{frame}
-
-\begin{frame}{Backpropagation: previous layers}
+}
+\ldots\;
+\only<2>{
 \begin{algorithm}[H]
-\For{l = L - 1 downto 1}{
+\For{l = L - 1 downto 2}{
   $x \gets add\_bias(o^{l - 1})$\;
   \ForEach{j}{
     $\delta^l_j \gets \displaystyle\sum_k{\delta^{l+1}_k w^l_{jk}} o^l_j (1 - o^l_j)$\;
@@ -286,6 +288,9 @@ $x \gets add\_bias(o^{L-1})$\;
   \ForEach{i, j}{
     $grad^l_{ij} \gets x_i \delta^l_j$\;
   }
+}
+\end{algorithm}
+}
 }
 \end{algorithm}
 \end{frame}

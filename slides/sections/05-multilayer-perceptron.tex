@@ -120,13 +120,16 @@
 \end{frame}
 
 \begin{frame}{Forward propagation}
+\SetKwProg{Fn}{}{}{end}\SetKwFunction{ForwardProp}{ForwardPropagation}
 \begin{algorithm}[H]
+\Fn(){\ForwardProp{x, w}}{
 $o^1 \gets x$\;
 \For{l = 2 to L}{
 $x = add\_bias(o^{l-1})$\;
 $o^l = g((w^l)^T x)$\;
 }
 $return~o$\;
+}
 \end{algorithm}
 \end{frame}
 
