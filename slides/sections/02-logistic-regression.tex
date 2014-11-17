@@ -353,17 +353,46 @@ def h(x, w):
           \frac{\partial e}{\partial w\only<1>{_i}} & = \frac{\partial \displaystyle\sum_{i =
         1}^n{-y \log(h_w(x)) - (1 - y) \log(1 -
       h_w(x)})}{\partial w\only<1>{_i}} \\~\\
-      & = x\only<1>{_i} \cdot (h_w(x) - y)\\~\\
+      & = x\only<1>{_i} \cdot \underbrace{(h_w(x) - y)}_{\delta}\\~\\
       \onslide<2>{~}
 \end{split}
   \end{equation*}
+\end{frame}
+
+\begin{frame}
+  $
+  \begin{array}{cc}
+    &
+    \left(
+      \begin{matrix}
+        \delta \\
+      \end{matrix}
+    \right) \\
+    &\\
+    \left(
+      \begin{matrix}
+        x_0 \\
+        \vdots \\
+        x_n
+      \end{matrix}
+    \right) & \left(
+      \only<1>{\begin{matrix}
+        x_0 \delta \\
+        \vdots \\
+        x_n \delta
+      \end{matrix}}
+    \right)
+  \end{array}
+  \qquad \frac{\partial E}{\partial w_i} = x_i \delta
+  $
 \end{frame}
 
 \begin{frame}[fragile]
   \begin{block}{}
     \begin{lstlisting}
 def gradient(x, y, w):
-    return x * (h(x, w) - y)
+    d = h(x, w) - y
+    return x * d
     \end{lstlisting}
   \end{block}
 \end{frame}
