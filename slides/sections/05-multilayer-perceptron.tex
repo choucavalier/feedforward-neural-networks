@@ -119,24 +119,16 @@
   \end{center}
 \end{frame}
 
-\begin{frame}[fragile]
-  \begin{block}{Forward propagation}
-    \begin{lstlisting}
-def add_bias(o):
-    return insert(o, 0, 1, axis=0)
-    |\pause|
-def h(x, w):
-    out = [x]|\pause|
-    for l in range(len(w)):|\pause|
-        x = add_bias(out[l])|\pause|
-        o = g(transpose(w[l]) * x)|\pause|
-        out.append(o)|\pause|
-    return out
-    \end{lstlisting}
-  \end{block}
+\begin{frame}{Forward propagation}
+\begin{algorithm}[H]
+$o^1 \gets x$\;
+\For{l = 2 to L}{
+$x = add\_bias(o^{l-1})$\;
+$o^l = g((w^l)^T x)$\;
+}
+$return~o$\;
+\end{algorithm}
 \end{frame}
-% Linearly separable data vs non-linearly separable data.
-
 
 \begin{frame}
   \begin{center}

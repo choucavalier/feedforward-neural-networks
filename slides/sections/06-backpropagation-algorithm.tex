@@ -264,27 +264,11 @@
   \end{equation*}
 \end{frame}
 
-\begin{frame}
-
-% \begin{algorithm}
-% \begin{algorithmic}
-% \State $\delta \geq out^L - y$
-% \State $grad \geq x * \delta^T$
-% \For{l = L - 1 to 1}
-%   \ForAll{j}
-%     \State $\delta_j = (\displaystyle\sum_k{\delta_k w_{jk}} * out^l_j * (1 - out^l_j)$
-%     \State $x = add\_bias(out^{l - 1})$
-%     \State $grad = [x * transpose(\delta)] + grad$
-%   \EndFor
-% \EndFor
-% \State return grad
-% \end{algorithmic}
-% \end{algorithm}
-
+\begin{frame}{Backpropagation: last layer}
 \begin{algorithm}[H]
-$x \gets add\_bias(out^1)$\;
+$x \gets add\_bias(o^{L-1})$\;
 \ForEach{j}{
-  $\delta^L_j \gets out^L_j - y_j$\;
+  $\delta^L_j \gets o^L_j - y_j$\;
 }
 \ForEach{i, j}{
   $grad^L_{ij} \gets x_i \delta^L_j$\;
@@ -292,12 +276,12 @@ $x \gets add\_bias(out^1)$\;
 \end{algorithm}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Backpropagation: previous layers}
 \begin{algorithm}[H]
 \For{l = L - 1 downto 1}{
-  $x \gets add\_bias(out^{l - 1})$\;
+  $x \gets add\_bias(o^{l - 1})$\;
   \ForEach{j}{
-    $\delta^l_j \gets \displaystyle\sum_k{\delta^{l+1}_k w_{jk}} out^l_j (1 - out^l_j)$\;
+    $\delta^l_j \gets \displaystyle\sum_k{\delta^{l+1}_k w^l_{jk}} o^l_j (1 - o^l_j)$\;
   }
   \ForEach{i, j}{
     $grad^l_{ij} \gets x_i \delta^l_j$\;

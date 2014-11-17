@@ -85,7 +85,7 @@ def gradient(x, y, w):
     &
     \left(
       \begin{matrix}
-        d\only<2>{_1& \ldots & d_{m}} \\
+        \delta\only<2>{_0& \ldots & \delta_{m}} \\
       \end{matrix}
     \right) \\
     &\\
@@ -97,12 +97,12 @@ def gradient(x, y, w):
       \end{matrix}
     \right) & \left(
       \only<1>{\begin{matrix}
-        x_0 d \\
+        x_0 \delta \\
         \vdots \\
-        x_n d
+        x_n \delta
       \end{matrix}}
       \only<2>{\begin{matrix}
-        x_0 d_0 & \ldots & x_0 d_m \\
+        x_0 \delta_0 & \ldots & x_0 \delta_m \\
         \vdots & \ddots & \vdots \\
         x_n d_0 & \ldots & x_n d_m
       \end{matrix}}
