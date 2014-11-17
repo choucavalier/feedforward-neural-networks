@@ -195,11 +195,11 @@
 
 \begin{frame}
   \begin{equation*}
-    \frac{\partial E}{\partial out_{j}} = \displaystyle\sum_k{\left(
+    \frac{\partial E}{\partial o_{j}} = \displaystyle\sum_k{\left(
         \only<1,2>{\frac{\partial E}{\partial net_k}}
         \only<3>{\delta^{l+1}_k}
         \only<1>\cdot
-        \only<1>{\frac{\partial net_k}{\partial out_j}}
+        \only<1>{\frac{\partial net_k}{\partial o_j}}
     \only<2,3>{w_{jk}}\right)}
   \end{equation*}
   \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
@@ -254,7 +254,7 @@
 \begin{frame}{Summary}
   \begin{equation*}
     \begin{split}
-      \frac{\partial{E}}{\partial w_{ij}} & = \delta_j x_i \\
+      \frac{\partial{E}}{\partial w_{ij}} & = x_i \delta_j\\
       \delta_j & = \left\{
       \begin{array}{ll}
         o_j - y_j & $if last layer$ \\
@@ -264,21 +264,44 @@
   \end{equation*}
 \end{frame}
 
-% \begin{frame}[fragile]
-%   \begin{block}{Backpropagation}
-%     \begin{lstlisting}
-% def gradient(out, y, w):
-%     L = len(out) - 1
-%     x = add_bias(out[L - 1])
-%     d = out[L] - y
-%     grad = [x * transpose(d)]
-% |\pause|
-%     for l in range(len(out))[1:-1][::-1]:|\pause|
-%         d_out = w[l][1:] * d|\pause|
-%         d = multiply(d_out, multiply(out[l], 1 - out[l]))|\pause|
-%         x = add_bias(out[l - 1])|\pause|
-%         grad = [x * transpose(d)] + grad|\pause|
-%     return grad
-%     \end{lstlisting}
-%   \end{block}
-% \end{frame}
+\begin{frame}
+
+% \begin{algorithm}
+% \begin{algorithmic}
+% \State $\delta \geq out^L - y$
+% \State $grad \geq x * \delta^T$
+% \For{l = L - 1 to 1}
+%   \ForAll{j}
+%     \State $\delta_j = (\displaystyle\sum_k{\delta_k w_{jk}} * out^l_j * (1 - out^l_j)$
+%     \State $x = add\_bias(out^{l - 1})$
+%     \State $grad = [x * transpose(\delta)] + grad$
+%   \EndFor
+% \EndFor
+% \State return grad
+% \end{algorithmic}
+% \end{algorithm}
+
+\begin{algorithm}[H]
+$x \gets add\_bias(out^1)$\;
+\ForEach{j}{
+  $\delta^L_j \gets out^L_j - y_j$\;
+}
+\ForEach{i, j}{
+  $grad^L_{ij} \gets x_i \delta^L_j$\;
+}
+\end{algorithm}
+\end{frame}
+
+\begin{frame}
+\begin{algorithm}[H]
+\For{l = L - 1 downto 1}{
+  $x \gets add\_bias(out^{l - 1})$\;
+  \ForEach{j}{
+    $\delta^l_j \gets \displaystyle\sum_k{\delta^{l+1}_k w_{jk}} out^l_j (1 - out^l_j)$\;
+  }
+  \ForEach{i, j}{
+    $grad^l_{ij} \gets x_i \delta^l_j$\;
+  }
+}
+\end{algorithm}
+\end{frame}
