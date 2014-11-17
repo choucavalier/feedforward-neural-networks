@@ -64,16 +64,13 @@ def g(x):
     return 1 / (1 + exp(x))
 
 def h(x, w):
-    return transpose(w) * x
+    return g(transpose(w) * x)
     \end{lstlisting}
   \end{block}
 \end{frame}
 
-\begin{frame}
-\end{frame}
-
 \begin{frame}[fragile]
-  \begin{block}{Hypothesis function}
+  \begin{block}{}
       \begin{lstlisting}
 def gradient(x, y, w):
     d = h(x, w) - y
@@ -94,9 +91,9 @@ def gradient(x, y, w):
     &\\
     \left(
       \begin{matrix}
-        x_{1} \\
+        x_0 \\
         \vdots \\
-        x_{n}
+        x_n
       \end{matrix}
     \right) & \left(
       \only<1>{\begin{matrix}

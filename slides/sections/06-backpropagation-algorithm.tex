@@ -140,11 +140,11 @@
 \begin{frame}[fragile]
   \begin{block}{Backpropagation}
     \begin{lstlisting}
-def gradient(out, y, w):
-    L = len(out) - 1
-    x = add_bias(out[L - 1])
-    d = out[L] - y
-    grad = [x * transpose(d)]
+def gradient(out, y, w):|\pause|
+    L = len(out) - 1|\pause|
+    x = add_bias(out[L - 1])|\pause|
+    d = out[L] - y|\pause|
+    grad = [x * transpose(d)]|\pause|
     ...
     \end{lstlisting}
   \end{block}
@@ -201,7 +201,7 @@ def gradient(out, y, w):
         \only<3,4>{\delta_k}
         \only<1>\cdot
         \only<1>{\frac{\partial net_k}{\partial out_j}}
-    \only<2,3,4>{w_{jl}}\right)} \onslide<4>{= w_j \cdot \delta_k}
+    \only<2,3,4>{w_{jl}}\right)} \onslide<4>{= w_j \cdot \delta}
   \end{equation*}
   \begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=2.5cm]
     \tikzstyle{every pin edge}=[<-,shorten <=1pt]

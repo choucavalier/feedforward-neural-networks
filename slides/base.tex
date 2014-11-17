@@ -25,33 +25,47 @@ escapeinside=||}
 \author{Valentin `toogy' Iovene\\
 Thibaud `zehir' Michaud}
 
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \tableofcontents[
+      currentsection,
+      sectionstyle=show/shaded,
+      subsectionstyle=show/shaded/hide
+    ]
+  \end{frame}
+}
+
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>
+    \tableofcontents[
+      currentsection,
+      sectionstyle=show/shaded,
+      subsectionstyle=show/shaded/hide
+    ]
+  \end{frame}
+}
+
 \begin{document}
 \maketitle
-\begin{frame}
-  \tableofcontents
-\end{frame}
 
 \section{Introduction}
-\tableofcontents[sectionstyle=show/shaded]
 \input{sections/01-introduction.tex}
 
 \section{Logistic regression}
-\tableofcontents[sectionstyle=show/shaded]
 \input{sections/02-logistic-regression.tex}
 
 \section{Single layer perceptron}
-\tableofcontents[sectionstyle=show/shaded]
 \input{sections/04-single-layer-perceptron.tex}
 
 \section{Multilayer perceptron}
-\tableofcontents[sectionstyle=show/shaded]
 \input{sections/05-multilayer-perceptron.tex}
 
 \section{Backpropagation algorithm}
-\tableofcontents[sectionstyle=show/shaded]
 \input{sections/06-backpropagation-algorithm.tex}
 
 \section{Optimizations}
-\tableofcontents[sectionstyle=show/shaded]
 \input{sections/07-optimizations.tex}
 \end{document}
